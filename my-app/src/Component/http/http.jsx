@@ -14,8 +14,3 @@ export const getStatistics = async (link) => {
     const { data } = await $host.post('/linkstatistics', { link })
     return {data}
 }
-
-export const qrrr = async (link) => {
-    const { data } = await $host.get('/code')
-    return {data}
-}
