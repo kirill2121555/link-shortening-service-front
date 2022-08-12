@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { getStatistics } from "../http/http";
+import Qrcode from "../qrcode/Qrcode";
 
 const Statistics = () => {
     const [link, setLink] = useState('')
     const [page, setPage] = useState('')
     const [error, SetError] = useState('')
+    const [qr, SetQr] = useState('')
+
 
     const click = async () => {
         const { data } = await getStatistics(link)
@@ -12,7 +15,8 @@ const Statistics = () => {
             SetError('link not found')
         }
         else {
-            setPage(data)
+            setPage(data[0])
+            SetQr(data[1])
             SetError('')
         }
     }
@@ -39,6 +43,8 @@ const Statistics = () => {
                         <label>Date of creation: {page.datecreate.replace(/[a-zа-яё]/gi, ' ').substr(0, page.datecreate.length - 8)}</label>
                         <br></br>
                         <label>Last viewed date: {page.datelastuse.replace(/[a-zа-яё]/gi, ' ').substr(0, page.datelastuse.length - 8)}</label>
+                        <Qrcode props={[qr, link]} />
+
                     </div>
                     :
                     <div>

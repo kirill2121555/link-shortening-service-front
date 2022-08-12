@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { createlink } from "../http/http";
-
+import { createlink, qrrr } from "../http/http";
+import Qrcode from "../qrcode/Qrcode";
 const Page = () => {
     const [link, setLink] = useState('')
     const [page, setPage] = useState('')
+    const [qr, setQr] = useState('')
 
     const click = async () => {
-        const { data } = await createlink(link)
-        setPage(data)
+        let { data } = await createlink(link)
+        setPage(data[1])
+        setQr(data[0])
     }
-
     return (
         <div>
             <form>
@@ -28,11 +29,16 @@ const Page = () => {
                     ''
                     :
                     <div>
+                        Short link:
+                        <br></br>
+                        <title>Short link:</title>
                         <input className="form-control"
                             value={page}
                             onChange={e => setPage(e.target.value)}
                         ></input>
                         <button onClick={() => navigator.clipboard.writeText(page)}>Copy link</button>
+                        <br></br>
+                        <Qrcode props={[qr, page]} />
                     </div>
                 }</div>
         </div>

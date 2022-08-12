@@ -1,16 +1,16 @@
 import React, { useState } from "react";
+import Qrcode from "../qrcode/Qrcode";
 import { createcastomlink } from "./../http/http";
 
-
 const Castomlink = () => {
-
     const [link, setLink] = useState('')
     const [textlink, settextlink] = useState('')
     const [castomlink, setCastomlink] = useState('')
-
+    const [qr, setQr] = useState('')
     const click = async () => {
         const { data } = await createcastomlink(link, textlink)
-        setCastomlink(data)
+        setCastomlink(data[0])
+        setQr(data[1])
     }
 
     return (<div>
@@ -40,6 +40,7 @@ const Castomlink = () => {
                         onChange={e => setCastomlink(e.target.value)}
                     ></input>
                     <button onClick={() => navigator.clipboard.writeText(castomlink)}>Copy link</button>
+                    <Qrcode props={[qr, castomlink]} />
                 </div>
             }
         </div>
