@@ -33,8 +33,9 @@ const Castomlink = () => {
             {castomlink === ''
                 ?
                 ''
-                    ? castomlink === 'Enter another text'
-                    :
+                :
+                castomlink === 'Enter another text'
+                    ?
                     <div>
                         <input className="form-control"
                             value={castomlink}
@@ -43,15 +44,15 @@ const Castomlink = () => {
                         <button onClick={() => navigator.clipboard.writeText(castomlink)}>Copy link</button>
 
                     </div>
-                :
-                <div>
-                    <input className="form-control"
-                        value={castomlink}
-                        onChange={e => setCastomlink(e.target.value)}
-                    ></input>
-                    <button onClick={() => navigator.clipboard.writeText(castomlink)}>Copy link</button>
-                    <Qrcode props={[qr, castomlink]} />
-                </div>
+                    :
+                    <div>
+                        <input className="form-control"
+                            value={castomlink}
+                            onChange={e => setCastomlink(e.target.value)}
+                        ></input>
+                        <button onClick={() => navigator.clipboard.writeText(castomlink)}>Copy link</button>
+                        <Qrcode props={[qr, castomlink]} />
+                    </div>
             }
         </div>
     </div>
