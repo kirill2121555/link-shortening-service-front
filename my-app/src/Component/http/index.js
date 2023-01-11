@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const $host = axios.create({
-    baseURL: 'https://link-shortening-service.herokuapp.com/'
+    baseURL: 'https://link-shortening-service-server.vercel.app/'
 })
 
 export {
