@@ -41,7 +41,6 @@ const Castomlink = () => {
                             value={castomlink}
                             onChange={e => setCastomlink(e.target.value)}
                         ></input>
-                        <button onClick={() => navigator.clipboard.writeText(castomlink)}>Copy link</button>
 
                     </div>
                     :
